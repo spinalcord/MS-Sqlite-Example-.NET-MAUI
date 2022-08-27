@@ -26,6 +26,9 @@ namespace MauiWithMSSqlite
     public class Column
     {
         public string name { get; set; } = string.Empty;
+
+        // perfectly to demonstrate this example, but in a real scenario you have to care about boxing & unboxing
+        // otherwise you get performance issues.
         public List<object> values { get; set; } = new List<object>();
     }
 
@@ -34,13 +37,14 @@ namespace MauiWithMSSqlite
     {
         public static SqliteDataReader TryExecuteReader(this SqliteCommand sqliteCommand)
         {
+            // not the best way but makes the code more readable.
             try
             {
                 return sqliteCommand.ExecuteReader();
             }
             catch
             {
-                return null;
+                return null; 
             }
         }
 
@@ -73,14 +77,14 @@ namespace MauiWithMSSqlite
             {
                 if (reader != null)
                 {
-
+                    // Get all Columns
                     for (int i = 0; i < reader.FieldCount /* Current number of columns.*/; i++)
                     {
                         Column col = new Column();
                         columns.Add(col);
                     }
 
-
+                    // Get all items, releated to the column
                     while (reader.Read())
                     {
                         for (int i = 0; i < reader.FieldCount /* Current number of columns.*/; i++)
@@ -105,8 +109,8 @@ namespace MauiWithMSSqlite
 
             SqliteCommand cmd = new SqliteCommand();
             cmd.Connection = db;
-            string commandStr = $"INSERT INTO {Tabelname}({fieldName}) VALUES("; // Insert into a specific field
-            // also posible: INSERT INTO {Tabelname} VALUES(1,2,3,..)";
+            string commandStr = $"INSERT INTO {Tabelname}({fieldName}) VALUES("; // specific field
+            // also posible: INSERT INTO {Tabelname} VALUES(1,2,3,..)"; // not specific
              
 
             foreach (string value in values)

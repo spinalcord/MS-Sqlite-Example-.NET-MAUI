@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiWithMSSqlite"
+             x:Class="MauiWithMSSqlite.MainPage">
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel/>
+    </ContentPage.BindingContext>
+    <ScrollView>
+    <StackLayout>
+        
+
+        <Button Text="Create DB file" Command="{Binding CreateDBCommand}"></Button>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Text="Create Table" Command="{Binding CreateTableCommand}"/>
+            <Entry Grid.Column="1"  Text="{Binding TableNameEntry}"></Entry>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Text="Create Field" Command="{Binding CreateFieldCommand}"/>
+            <Entry Grid.Column="1"  Text="{Binding FieldEntry}"></Entry>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/> 
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Text="Write Data" Command="{Binding WriteDataCommand}"/>
+            <Entry Grid.Column="1" Text="{Binding WriteDataEntry}"></Entry>
+        </Grid>
+
+        <Button Grid.Column="0" Text="Read Data" Command="{Binding ReadDataCommand}"/>
+        
+        <Label Text="Log"></Label>
+        <Editor HeightRequest="200" Text="{Binding LogEditor}"></Editor>
+
+    </StackLayout>
+    </ScrollView>
+</ContentPage>
